@@ -14,5 +14,15 @@ pipeline {
                 sh 'mvn clean package'
             }
         }        
-    }
-}
+        stage('2. docker 버전 확인') {
+            steps {
+                sh 'docker cersion'
+            }
+        }
+        stage('3.Docker Build') {
+            steps {
+                sh 'docker build -t ex02-app:latest .'
+  	}
+  }
+  }
+  }
