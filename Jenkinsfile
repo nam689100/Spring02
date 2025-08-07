@@ -16,7 +16,7 @@ pipeline {
         }        
         stage('2. docker 버전 확인') {
             steps {
-                sh 'docker cersion'
+                sh 'docker version'
             }
         }
         stage('3.Docker Build') {
