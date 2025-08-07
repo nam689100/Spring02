@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'my-maven'  // 젠킨스에서 설치한 이름
+        maven 'my-maven'
     }
 
     stages {
