@@ -2,29 +2,39 @@ pipeline {
     agent any
     
     tools {
-        maven 'my-maven'
+        maven 'my-maven'  // 젠킨스에서 설치한 이름
     }
-
+    environment {
+        APP_NAME = 'ex02-app'
+        DOCKER_TAG = 'latest'
+        IMAGE_NAME = "belokana/${APP_NAME}:${DOCKER_TAG}"
+        TARGET_HOST = '192.168.56.107'
+        TARGET_USER = 'vagrant'
+        PORT = '8081'
+    }
     stages {
-        stage('0. 연결 확인9') { steps { echo '스테이지 출발' } }
+        stage('0. 자동화 확인1') { steps { echo '스테이지 출발' } }
         
         stage('1. Build') {
             steps {
                 echo 'Maven으로 빌드 시작'
                 sh 'mvn clean package'
             }
-        }        
-        stage('2. docker 버전 확인') {
+        }
+        
+        stage('2. Check Docker') {
             steps {
                 sh 'docker version'
             }
         }
-        stage('3.Docker Build') {
+        
+        stage('3. Docker Build') {
             steps {
                 sh 'docker build -t ex02-app:latest .'
-  	}
-  }
-  		stage('4. Docker Push') {
+            }
+        }
+
+        stage('4. Docker Push') {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'dockerhub-cred',
@@ -54,3 +64,21 @@ EOF
         }        
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
