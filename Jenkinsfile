@@ -48,7 +48,7 @@ pipeline {
                         # 기존 컨테이너 제거, 없을 경우 에러 무시
                         docker rm -f $APP_NAME 2>/dev/null || true
                         docker run -d -p $PORT:$PORT --name $APP_NAME $IMAGE_NAME
-EOF # 반드시 맨앞에
+EOF
                 '''
             }
         }        
